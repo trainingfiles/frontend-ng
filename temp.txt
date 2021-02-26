@@ -86,19 +86,60 @@ import { Component } from '@angular/core';
   </div>
   <hr>
   
-  <div *ngIf="agree ; else areyousure">
+  <ng-container *ngIf="agree ; else areyousure">
    <h2>Terms & Conditions</h2>
     <p>
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero blanditiis, nulla, expedita quae sunt veritatis quas iste rem placeat tempora atque voluptatibus provident nesciunt corrupti molestiae. Architecto, excepturi nam atque!
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero blanditiis, nulla, expedita quae sunt veritatis quas iste rem placeat tempora atque voluptatibus provident nesciunt corrupti molestiae. Architecto, excepturi nam atque!
     </p>
-  </div>
+  </ng-container>
 
   <ng-template #areyousure >
     Are you sure you dont want to read the terms and conditions
   </ng-template>
 
   Show terms and conditions : <input type="checkbox" (change)="agree = !agree">
+  <hr>
+
+  <ng-template [ngIf]="agree">
+  <h2>condition based on ng-template</h2>
+   <p>
+     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero blanditiis, nulla, expedita quae sunt veritatis quas iste rem placeat tempora atque voluptatibus provident nesciunt corrupti molestiae. Architecto, excepturi nam atque!
+     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero blanditiis, nulla, expedita quae sunt veritatis quas iste rem placeat tempora atque voluptatibus provident nesciunt corrupti molestiae. Architecto, excepturi nam atque!
+   </p>
+ </ng-template>
+  <hr>
+  <ol>
+    <li *ngFor="let hero of justiceleague">{{ hero }}</li>
+  </ol>
+  <div>
+    <p *ngFor="let hero of justiceleague; index as idx; odd as od; even as ev; first as fst; last as lst"> 
+    
+    {{( idx+1)+" | "+hero }}  
+    <ng-template [ngIf]="fst"> First Hero </ng-template>
+    <ng-template [ngIf]="lst"> Last Hero </ng-template>
+    <ng-template [ngIf]="!lst && !fst"> Inbetween Hero </ng-template>
+    <ng-template [ngIf]="!od"> Odd Hero </ng-template>
+    <ng-template [ngIf]="!ev"> Even Hero </ng-template>
+    </p>
+  </div>
+  <br>
+  <br>
+  <br>
+  <input [value]="score" min="0" max="10" step="1" type="range" (input)="score = $event.target.value">Score is {{ score }}
+  <input [(ngModel)]="score" min="0" max="10" step="1" type="range" >
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
   `,
   styles : [`
     .box{
@@ -123,5 +164,6 @@ export class AppComponent {
   bgcol = 'orange';
   styleprop = "background-color : purple; color : white";
   power = 6;
+  score = 2;
   justiceleague = ['Batman', 'Superman', 'Aquaman', 'Flash', 'Wonder Women', 'Cyborg' ]
 }
