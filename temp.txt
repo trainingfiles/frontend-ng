@@ -84,7 +84,21 @@ import { Component } from '@angular/core';
   <div class="box" [ngStyle]="{ color : '#b78ae6', backgroundColor : 'black' }">
     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum aut cumque alias repellendus ab itaque soluta, vel quibusdam minima nostrum quae enim eaque ex ipsa placeat recusandae, aliquid molestiae rem?
   </div>
+  <hr>
+  
+  <div *ngIf="agree ; else areyousure">
+   <h2>Terms & Conditions</h2>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero blanditiis, nulla, expedita quae sunt veritatis quas iste rem placeat tempora atque voluptatibus provident nesciunt corrupti molestiae. Architecto, excepturi nam atque!
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero blanditiis, nulla, expedita quae sunt veritatis quas iste rem placeat tempora atque voluptatibus provident nesciunt corrupti molestiae. Architecto, excepturi nam atque!
+    </p>
+  </div>
 
+  <ng-template #areyousure >
+    Are you sure you dont want to read the terms and conditions
+  </ng-template>
+
+  Show terms and conditions : <input type="checkbox" (change)="agree = !agree">
   `,
   styles : [`
     .box{
@@ -104,7 +118,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'step2-directives';
-  agree = true;
+  agree = false;
   corner = "bluebox";
   bgcol = 'orange';
   styleprop = "background-color : purple; color : white";
